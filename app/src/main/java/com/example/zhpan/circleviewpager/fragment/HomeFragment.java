@@ -20,8 +20,8 @@ import com.example.zhpan.circleviewpager.bean.ArticleWrapper;
 import com.example.zhpan.circleviewpager.bean.DataWrapper;
 import com.example.zhpan.circleviewpager.net.BannerData;
 import com.example.zhpan.circleviewpager.net.RetrofitGnerator;
-import com.example.zhpan.circleviewpager.recyclerview.ui.CustomRecyclerView;
 import com.example.zhpan.circleviewpager.viewholder.ImageResourceViewHolder;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.zhpan.bannerview.BannerViewPager;
@@ -49,7 +49,7 @@ public class HomeFragment extends BaseFragment {
 
     private BannerViewPager<BannerData, BaseViewHolder<BannerData>> mViewPagerHorizontal;
     private BannerViewPager<Integer, ImageResourceViewHolder> mViewPagerVertical;
-    private CustomRecyclerView recyclerView;
+    private XRecyclerView recyclerView;
     private ArticleAdapter articleAdapter;
     private SmartRefreshLayout mSmartRefreshLayout;
     private IndicatorView mIndicatorView;
@@ -106,12 +106,12 @@ public class HomeFragment extends BaseFragment {
     private void initRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getMContext()));
-        recyclerView.addHeadView(getHeaderView(), true);
+        recyclerView.addHeaderView(getHeaderView());
         recyclerView.addItemDecoration(new DividerItemDecoration(getMContext(),
                 DividerItemDecoration.VERTICAL));
         articleAdapter = new ArticleAdapter(getMContext(), new ArrayList<>());
         recyclerView.setAdapter(articleAdapter);
-        recyclerView.getHeadAndFootAdapter();
+        recyclerView.setPullRefreshEnabled(false);
     }
 
     private void initRefreshLayout(View view) {
